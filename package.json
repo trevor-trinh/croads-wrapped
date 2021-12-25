@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^6.5.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15",
+    "puppeteer": "^13.0.1"
+  },
+  "scripts": {
+    "server": "node index.js",
+    "web": "yarn --cwd web start",
+    "dev": "concurrently \"nodemon --exec yarn run server\" \"yarn run web\""
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
+}
