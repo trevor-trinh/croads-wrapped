@@ -13,9 +13,9 @@ const findAvgTime = times => {
 // idea is to load dates once
 // then refer to same array to not do more work
 export let commonDates = [];
-export const loadDates = data => {
+export const loadDates = datum => {
   commonDates = [];
-  for (let item of data['On-Campus Blue Meal Plan Activity']) {
+  for (let item of datum) {
     commonDates.push(new Date(item['Posted']));
   }
 };

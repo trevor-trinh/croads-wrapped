@@ -3,14 +3,16 @@ const puppeteer = require('puppeteer');
 const cors = require('cors');
 
 const login_url = 'https://services.housing.berkeley.edu/c1c/dyn/login.asp';
-const data_url = 'https://services.housing.berkeley.edu/c1c/dyn/bals.asp';
+const data_url =
+  'https://services.housing.berkeley.edu/c1c/dyn/bals.asp?pln=Full';
+const PORT = 5001;
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 const loadPage = async creds => {
-  const { email, password } = creds;
+  const { calid, password } = creds;
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -18,7 +20,7 @@ const loadPage = async creds => {
 
   // login
   await page.waitForSelector('#username');
-  await page.type('#username', email);
+  await page.type('#username', calid);
   await page.waitForSelector('#password');
   await page.type('#password', password);
   await page.waitForSelector('#submit');
@@ -32,10 +34,14 @@ const loadPage = async creds => {
     '#auth_methods > fieldset:nth-child(1) > div.row-label.push-label > button',
   );
 
-  // go to balances
-  await page.waitForSelector(
-    'body > div > div.container.clearfix > div > div > div > div.col3 > div > table:nth-child(5) > tbody > tr:nth-child(1) > td > a',
+  // get user's name
+  await page.waitForNetworkIdle();
+  app.locals.username = await page.$eval(
+    'body > div > div.container.clearfix > div > div > div > div.col3 > div > table.bodytext > tbody > tr:nth-child(2) > td > b',
+    el => el.innerText,
   );
+
+  // go to balances
   await page.goto(data_url, { waitUntil: 'load', timeout: 0 });
   // await page.screenshot({ path: 'balances.png' });
 
@@ -81,12 +87,25 @@ const scrape = async page => {
 };
 
 app.post('/api', async (req, res) => {
-  const page = await loadPage(req.body);
-  const data = await scrape(page);
+  let data;
 
-  res.json(data);
+  try {
+    const page = await loadPage(req.body);
+    data = await scrape(page);
+  } catch (error) {
+    let msg;
+
+    if (error instanceof TypeError) {
+      msg = 'Invalid credentials.';
+    } else {
+      msg = 'Something went wrong.';
+    }
+
+    return res.status(400).json({ error: msg });
+  }
+  return res.status(200).json({ username: app.locals.username, ...data });
 });
 
-app.listen(3001, () => {
-  console.log('server is running on port 3001');
+app.listen(PORT, () => {
+  console.log(`server running on http://localhost:${PORT}`);
 });

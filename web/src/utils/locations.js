@@ -1,6 +1,6 @@
-export const getLocationData = data => {
+export const getLocationData = datum => {
   let out = {};
-  for (let item of data['On-Campus Blue Meal Plan Activity']) {
+  for (let item of datum) {
     out[item['Location']] = (out[item['Location']] ?? 0) + 1;
   }
   return out;
