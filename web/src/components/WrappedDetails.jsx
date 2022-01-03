@@ -3,12 +3,16 @@ import {
   Stack,
   Text,
   Heading,
-  SimpleGrid,
-  Button,
   Center,
   HStack,
+  Button,
+  Flex,
+  Spacer,
+  VStack,
 } from '@chakra-ui/react';
+import { HiChevronDoubleUp } from 'react-icons/hi';
 import WrappedTime from './WrappedTime';
+import PictureFrame from './PictureFrame';
 
 const WrappedDetails = ({ avgWeek, gradientTheme }) => {
   const formatTime = date =>
@@ -58,7 +62,7 @@ const WrappedDetails = ({ avgWeek, gradientTheme }) => {
 
   return (
     <>
-      <Container maxW={'6xl'} minH={'95vh'}>
+      <Container maxW={'6xl'} minH={'95vh'} pb={'calc(100vw * 0.09719)'}>
         <Stack
           textAlign={'center'}
           align={'center'}
@@ -71,36 +75,64 @@ const WrappedDetails = ({ avgWeek, gradientTheme }) => {
           </BigText>
         </Stack>
 
-        <BigText>Most of these were used at . . .</BigText>
+        <Stack>
+          <BigText>Most of these were used at . . .</BigText>
 
-        <Center>
-          {/* TODO: image border custom component */}
-          <Text>IMAGE HERE</Text>
-        </Center>
+          <Center pt={4}>
+            <PictureFrame
+              w={'lg'}
+              alt="croads"
+              src="https://i2.wp.com/www.dailycal.org/assets/uploads/2016/11/patz_mikaelaRaphael_staff.jpg?ssl=1&w=900"
+            />
+          </Center>
 
-        <BigText textAlign="right">
-          . . . <BigColor>Crossroads</BigColor>!
-        </BigText>
+          <BigText textAlign="right">
+            . . . <BigColor>Crossroads</BigColor>!
+          </BigText>
 
-        <SmallText textAlign="right">You ate here 114 times</SmallText>
+          <SmallText textAlign="right">You ate here 114 times</SmallText>
 
-        <BigText>As for the runner-ups, </BigText>
+          <BigText>As for the runner-ups, </BigText>
 
-        <HStack>
-          <Text>IMAGE HERE</Text>
-          <SmallText>
-            You ate at <SmallColor>Clark Kerr</SmallColor> 12 times
-          </SmallText>
-        </HStack>
+          <Flex align={'end'} pt={2}>
+            <PictureFrame
+              w={'md'}
+              alt="croads"
+              src="https://i2.wp.com/www.dailycal.org/assets/uploads/2016/11/patz_mikaelaRaphael_staff.jpg?ssl=1&w=900"
+            />
+            <Spacer />
+            <SmallText pb={10}>
+              You ate at <SmallColor>Clark Kerr</SmallColor> 12 times . . .
+            </SmallText>
+            <Spacer />
+          </Flex>
 
-        <HStack>
-          <SmallText>
-            . . . and at <SmallColor>Cafe 3</SmallColor> 2 times.
-          </SmallText>
-          <Text>IMAGE HERE</Text>
-        </HStack>
+          <Flex align={'end'} pt={2}>
+            <Spacer />
+            <SmallText>
+              . . . and at <SmallColor>Cafe 3</SmallColor> 2 times.
+            </SmallText>
+            <Spacer />
+
+            <PictureFrame
+              w={'sm'}
+              alt="croads"
+              src="https://i2.wp.com/www.dailycal.org/assets/uploads/2016/11/patz_mikaelaRaphael_staff.jpg?ssl=1&w=900"
+            />
+          </Flex>
+        </Stack>
       </Container>
       <WrappedTime />
+      <Center pb={{ base: 10, md: 12 }}>
+        <Button
+          onClick={() =>
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+          }
+          rightIcon={<HiChevronDoubleUp />}
+        >
+          Back to Top
+        </Button>
+      </Center>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { Text, Image, Box, useColorModeValue, chakra } from '@chakra-ui/react';
+import { Text, Image, Box, useColorModeValue } from '@chakra-ui/react';
 
 const MealTimeCard = ({ meal, time, image }) => (
   <Box
@@ -13,19 +13,15 @@ const MealTimeCard = ({ meal, time, image }) => (
 
     <Box py={5} textAlign="center">
       <Text
-        display="block"
         fontSize="2xl"
         color={useColorModeValue('gray.800', 'white')}
         fontWeight="bold"
       >
         {time}
       </Text>
-      <chakra.span
-        fontSize="sm"
-        color={useColorModeValue('gray.700', 'gray.200')}
-      >
+      <Text fontSize="sm" color={useColorModeValue('gray.700', 'gray.200')}>
         {meal}
-      </chakra.span>
+      </Text>
     </Box>
   </Box>
 );

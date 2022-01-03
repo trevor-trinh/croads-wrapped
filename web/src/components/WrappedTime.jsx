@@ -1,12 +1,8 @@
 import {
   Container,
-  Stack,
-  Text,
   Heading,
   SimpleGrid,
-  Button,
   Center,
-  HStack,
   Box,
   VStack,
 } from '@chakra-ui/react';
@@ -85,7 +81,7 @@ const WrappedTime = () => {
         <Container maxW={'6xl'}>
           <VStack
             as={Center}
-            pb={{ base: 20, md: 32 }}
+            pb={{ base: 14, md: 20 }}
             spacing={{ base: 12, md: 14 }}
           >
             <Heading
