@@ -1,10 +1,23 @@
 // not very accurate calculations, gets the job done for now
 // need to talk to someone...
 
-const getRange = (date, rangeType) => {
+// shared date object
+// TODO: might need to create seperate shared date object
+//       for both navbar and wrapped
+let currentDate = new Date();
+
+export const getCurrentDate = () => {
+  return currentDate;
+};
+export const setCurrentDate = date => {
+  currentDate = new Date(date);
+};
+
+export const getRange = (date, rangeType) => {
   let start;
   let end;
 
+  // TODO: hardcoded date ranges right now
   if (rangeType === 'semester') {
     if (date.getMonth() <= 4) {
       // spring jan11 - may15
@@ -52,8 +65,8 @@ export const getSwipeData = dates => {
 
   // to find all swipes in another week, change checkable's second param to be in that range somehwere
   let checks = [
-    checkable(weekSwipes, new Date(), 'week'),
-    checkable(semesterSwipes, new Date(), 'semester'),
+    checkable(weekSwipes, currentDate, 'week'),
+    checkable(semesterSwipes, currentDate, 'semester'),
   ];
 
   for (let i = 1; i < dates.length; i++) {
@@ -62,7 +75,7 @@ export const getSwipeData = dates => {
     }
   }
 
-  let { start: semStart, end: semEnd } = getRange(new Date(), 'semester');
+  let { start: semStart, end: semEnd } = getRange(currentDate, 'semester');
 
   // finds the swipes per day the multiples by 7 for week and rounds
   return {
