@@ -1,15 +1,17 @@
 const express = require('express');
 const puppeteer = require('puppeteer');
 const cors = require('cors');
+const path = require('path');
 
 const login_url = 'https://services.housing.berkeley.edu/c1c/dyn/login.asp';
 const data_url =
   'https://services.housing.berkeley.edu/c1c/dyn/bals.asp?pln=Full';
-const PORT = 5001;
+const PORT = 5000;
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'web', 'build')));
 
 const loadPage = async creds => {
   const { calid, password } = creds;
@@ -85,6 +87,10 @@ const scrape = async page => {
     return data;
   });
 };
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'web', 'build', 'index.html'));
+});
 
 app.post('/api', async (req, res) => {
   let data;
