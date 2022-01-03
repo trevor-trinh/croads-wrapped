@@ -1,30 +1,15 @@
 import { Container, Stack, Text, Heading, SimpleGrid } from '@chakra-ui/react';
 import DateCard from '../components/DateCard';
-import { getRange } from '../utils/swipes';
 import { useEffect } from 'react';
+import { cardDateData } from '../utils/data';
 
-// TODO: hardcoded date ranges right now
-const dateData = [
-  {
-    semester: 'Fall 2021',
-    date: new Date(2021, 7, 18),
-    dateRange: getRange(new Date(2021, 7, 18), 'semester'),
-    image:
-      'https://images.unsplash.com/photo-1574125053225-146d962568ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
-  },
-  {
-    semester: 'Spring 2022',
-    date: new Date(2022, 0, 11),
-    dateRange: getRange(new Date(2022, 0, 11), 'semester'),
-    image:
-      'https://www.visitcalifornia.com/sites/visitcalifornia.com/files/VC_SpotlightBerkeley_Hero_Stock_RF_149303390_1280x640.jpg',
-  },
-];
-
-const HomePage = ({ username }) => {
+const HomePage = ({ username, data }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-  }, []);
+
+    // for whoever's curious
+    window.rawUserData = data;
+  }, [data]);
 
   return (
     <Container maxW={'5xl'} minH={'95vh'}>
@@ -59,8 +44,8 @@ const HomePage = ({ username }) => {
         </Text>
         <Container maxW={'4xl'}>
           <SimpleGrid columns={[1, null, 2]} w={'full'} spacing={12}>
-            {dateData
-              .sort((a, b) => b.date - a.date)
+            {cardDateData
+              .sort((a, b) => b.dateRange.start - a.dateRange.start)
               .map(cardProps => (
                 <DateCard {...cardProps} key={cardProps.semester} />
               ))}

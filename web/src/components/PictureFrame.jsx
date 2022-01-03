@@ -1,5 +1,5 @@
 import { Image } from '@chakra-ui/react';
-import PicFrame from '../images/pictureframe.png';
+import PicFrame from '../assets/pictureframe.png';
 
 const PictureFrame = ({ src, alt, ...props }) => {
   return (

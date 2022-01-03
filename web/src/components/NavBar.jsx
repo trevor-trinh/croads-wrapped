@@ -24,10 +24,42 @@ import {
   HiOutlineCreditCard,
 } from 'react-icons/hi';
 import NavLogo from './NavLogo';
+import { useEffect, useState } from 'react';
+import { parseData, getDateRange } from '../utils/data';
 
 // TODO: make mobile friendly
-export default function Nav({ username, flexBal, swipesBal, weekStart }) {
+// BUG: when it is open and navigate to a wrapped card it will close
+export default function Nav({ data }) {
   const { isOpen, onToggle } = useDisclosure();
+
+  // for if ever can change nav bar date
+  const [date, setDate] = useState(new Date());
+  const [username, setUsername] = useState();
+  const [flexBal, setFlexBal] = useState();
+  const [swipesBal, setSwipesBal] = useState();
+  const [weekStart, setWeekStart] = useState();
+
+  useEffect(() => {
+    const { swipeDatum } = parseData(data, date);
+    setUsername(data['username']);
+
+    // change nav bar date, show flexbal on end of that day
+    setFlexBal(
+      data['On-Campus Meal Plan Flex Dollars Activity'][0]['New Balance'],
+    );
+    setSwipesBal(swipeDatum.thisWeek);
+
+    setWeekStart(
+      getDateRange(date, 'week').start.toLocaleDateString(navigator.language, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }),
+    );
+
+    // temp until more is done, also for whoever's curious
+    window.setNavDate = dateum => setDate(dateum);
+  }, [data, date]);
 
   return (
     <Box
@@ -53,12 +85,8 @@ export default function Nav({ username, flexBal, swipesBal, weekStart }) {
               <HStack spacing={3}>
                 <Text>
                   {/* TODO: add something to change the currentDate, might need different reference for the navbar and the wrapped section */}
-                  Week of:{' '}
-                  {weekStart.toLocaleDateString(navigator.language, {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
+                  {/* onHover calendar when isOpen to show calendar date selector */}
+                  Week of: {weekStart}
                 </Text>
                 <Divider orientation="vertical" />
 

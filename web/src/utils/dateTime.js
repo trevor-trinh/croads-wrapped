@@ -1,3 +1,4 @@
+const emptyDate = new Date(new Date().setHours(0, 0, 0, 0));
 const isWeekend = date => !(date.getDay() % 6);
 
 const findAvgTime = times => {
@@ -6,18 +7,13 @@ const findAvgTime = times => {
     totalMins += time.getHours() * 60 + time.getMinutes();
   }
   let avg = totalMins / times.length;
+
+  if (isNaN(avg)) {
+    return emptyDate;
+  }
+
   // dummy date for date object
   return new Date(2000, 11, 5, 0, avg);
-};
-
-// idea is to load dates once
-// then refer to same array to not do more work
-export let commonDates = [];
-export const loadDates = datum => {
-  commonDates = [];
-  for (let item of datum) {
-    commonDates.push(new Date(item['Posted']));
-  }
 };
 
 // find the min, max, avg meal-times
@@ -51,8 +47,8 @@ export const getTimeData = dates => {
   }
 
   return {
-    early: min,
-    late: max,
+    early: min || emptyDate,
+    late: max || emptyDate,
     avg: {
       breakfast: findAvgTime(breakfast),
       lunch: findAvgTime(lunch),

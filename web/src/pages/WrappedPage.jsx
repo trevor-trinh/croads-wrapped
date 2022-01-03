@@ -4,12 +4,16 @@ import { useState, useEffect } from 'react';
 import WrappedHero from '../components/WrappedHero';
 import WrappedDetails from '../components/WrappedDetails';
 
-const WrappedPage = ({ data, swipes, locations, mealTimes }) => {
+const WrappedPage = ({ swipes, locations, mealTimes, setDate }) => {
   const tempGradient = 'linear(to-r, red.400,pink.400)';
   const location = useLocation();
   const { date } = location.state;
 
   const [showDetails, setShowDetails] = useState(false);
+
+  useEffect(() => {
+    setDate(date);
+  }, [date, setDate]);
 
   useEffect(() => {
     window.scrollTo({
@@ -22,11 +26,20 @@ const WrappedPage = ({ data, swipes, locations, mealTimes }) => {
   return (
     <>
       {showDetails ? (
-        <WrappedDetails avgWeek={8} gradientTheme={tempGradient} />
+        <WrappedDetails
+          gradientTheme={tempGradient}
+          avgWeek={swipes.avgWeek}
+          locations={locations}
+          timeEarly={mealTimes.early}
+          timeLate={mealTimes.late}
+          timeBreakfast={mealTimes.avg.breakfast}
+          timeLunch={mealTimes.avg.lunch}
+          timeDinner={mealTimes.avg.dinner}
+        />
       ) : (
         <WrappedHero
           gradientTheme={tempGradient}
-          semesterSwipes={103}
+          semesterSwipes={swipes.total}
           setShowDetails={setShowDetails}
         />
       )}

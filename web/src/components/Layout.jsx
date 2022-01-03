@@ -1,21 +1,9 @@
 import NavBar from './NavBar';
 import Footer from './Footer';
 
-const Layout = ({
-  loading,
-  username,
-  swipesBal,
-  flexBal,
-  weekStart,
-  children,
-}) => (
+const Layout = ({ data, loading, children }) => (
   <>
-    <NavBar
-      username={username}
-      swipesBal={swipesBal}
-      flexBal={flexBal}
-      weekStart={weekStart}
-    />
+    <NavBar data={data} />
     {!loading && children}
     <Footer />
   </>

@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-const DateCard = ({ date, image, semester, dateRange }) => {
+const DateCard = ({ semester, dateRange, image }) => {
   const formatDate = dateum =>
     dateum.toLocaleDateString(navigator.language, {
       month: 'long',
@@ -74,7 +74,11 @@ const DateCard = ({ date, image, semester, dateRange }) => {
             </Text>
 
             <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-              <LinkOverlay as={Link} to="/wrapped" state={{ date: date }}>
+              <LinkOverlay
+                as={Link}
+                to="/wrapped"
+                state={{ date: dateRange.start }}
+              >
                 {semester}
               </LinkOverlay>
             </Heading>

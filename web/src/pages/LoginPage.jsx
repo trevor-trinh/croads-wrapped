@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import OskiL from '../images/OskiL.jpg';
+import OskiL from '../assets/OskiL.jpg';
 import Footer from '../components/Footer';
 
 const LoginPage = ({ setData }) => {

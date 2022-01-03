@@ -8,28 +8,40 @@ import {
 } from '@chakra-ui/react';
 import MealTimeCard from './MealTimeCard';
 
-const mealTimeData = [
-  {
-    meal: 'Breakfast',
-    time: '8:00 AM',
-    image:
-      'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnJlYWtmYXN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-  },
-  {
-    meal: 'Lunch',
-    time: '12:00 PM',
-    image:
-      'https://images.unsplash.com/photo-1611520189922-f7b1ba7d801e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fGNoaW5lc2UlMjBmb29kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-  },
-  {
-    meal: 'Dinner',
-    time: '6:00 PM',
-    image:
-      'https://images.unsplash.com/photo-1614104030967-5ca61a54247b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aG90cG90fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-  },
-];
+const WrappedTime = ({
+  timeEarly,
+  timeLate,
+  timeBreakfast,
+  timeLunch,
+  timeDinner,
+}) => {
+  const formatTime = date =>
+    date.toLocaleTimeString(navigator.language, {
+      hour: 'numeric',
+      minute: 'numeric',
+    });
 
-const WrappedTime = () => {
+  const mealTimeData = [
+    {
+      meal: 'Breakfast',
+      time: formatTime(timeBreakfast),
+      image:
+        'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnJlYWtmYXN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    },
+    {
+      meal: 'Lunch',
+      time: formatTime(timeLunch),
+      image:
+        'https://images.unsplash.com/photo-1611520189922-f7b1ba7d801e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fGNoaW5lc2UlMjBmb29kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    },
+    {
+      meal: 'Dinner',
+      time: formatTime(timeDinner),
+      image:
+        'https://images.unsplash.com/photo-1614104030967-5ca61a54247b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aG90cG90fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    },
+  ];
+
   return (
     <>
       <Box
@@ -57,7 +69,7 @@ const WrappedTime = () => {
                 fontWeight={'minibold'}
                 color={'white'}
               >
-                7:49 AM
+                {formatTime(timeEarly)}
               </Heading>
             </VStack>
 
@@ -70,7 +82,7 @@ const WrappedTime = () => {
                 fontWeight={'minibold'}
                 color={'white'}
               >
-                8:21 PM
+                {formatTime(timeLate)}
               </Heading>
             </VStack>
           </VStack>
