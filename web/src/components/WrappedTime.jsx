@@ -45,7 +45,6 @@ const WrappedTime = ({
   return (
     <>
       <Box
-        // changed behaviors cuz css sucks lmao
         bgGradient={
           'linear-gradient(360deg, #9795ef, #b591e9, #ce8de0, #e38ad4, #f489c7, #ff89b8, #ff8ca8, #ff9199, #ff988a, #ffa17d, #ffab73, #ffb56b)'
         }
@@ -105,8 +104,6 @@ const WrappedTime = ({
             </Heading>
 
             <SimpleGrid columns={[1, 1, 1, 3]} w={'full'} spacing={12}>
-              {/* line where the meal shows up based on the time between earliest and latest */}
-              {/* but three cards is so much easier for now */}
               {mealTimeData.map(cardProps => (
                 <MealTimeCard {...cardProps} key={cardProps.meal} />
               ))}

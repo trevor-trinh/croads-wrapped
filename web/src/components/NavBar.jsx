@@ -26,10 +26,9 @@ import {
 import NavLogo from './NavLogo';
 import { useEffect, useState } from 'react';
 import { parseData, getDateRange } from '../utils/data';
+import { VscFeedback, VscGithub } from 'react-icons/vsc';
 
-// TODO: make mobile friendly
-// BUG: when it is open and navigate to a wrapped card it will close
-export default function Nav({ data }) {
+const Nav = ({ data }) => {
   const { isOpen, onToggle } = useDisclosure();
 
   // for if ever can change nav bar date
@@ -43,7 +42,6 @@ export default function Nav({ data }) {
     const { swipeDatum } = parseData(data, date);
     setUsername(data['username']);
 
-    // change nav bar date, show flexbal on end of that day
     setFlexBal(
       data['On-Campus Meal Plan Flex Dollars Activity'][0]['New Balance'],
     );
@@ -78,16 +76,11 @@ export default function Nav({ data }) {
         <NavLogo />
 
         <HStack spacing={6}>
-          {/* TODO: try adding framer mation again later, but collapse good enuf */}
           <HStack spacing={3}>
             <IconButton icon={<Icon as={CalendarIcon} />} onClick={onToggle} />
             <Collapse in={isOpen} animateOpacity>
               <HStack spacing={3}>
-                <Text>
-                  {/* TODO: add something to change the currentDate, might need different reference for the navbar and the wrapped section */}
-                  {/* onHover calendar when isOpen to show calendar date selector */}
-                  Week of: {weekStart}
-                </Text>
+                <Text>Week of: {weekStart}</Text>
                 <Divider orientation="vertical" />
 
                 <Icon as={HiOutlineCreditCard} w={5} h={5} />
@@ -109,6 +102,26 @@ export default function Nav({ data }) {
                   {username}
                 </Center>
                 <MenuItem
+                  icon={<VscFeedback />}
+                  onClick={() =>
+                    window.open('https://forms.gle/Bqxd8jXsBc9E4HrC8', '_blank')
+                  }
+                >
+                  Feedback
+                </MenuItem>
+                <MenuItem
+                  icon={<VscGithub />}
+                  onClick={() =>
+                    window.open(
+                      'https://github.com/trevor-trinh/croads-wrapped',
+                      '_blank',
+                    )
+                  }
+                >
+                  Github Repo
+                </MenuItem>
+
+                <MenuItem
                   icon={<HiLogout color="red" />}
                   onClick={() => window.location.reload()}
                 >
@@ -121,4 +134,6 @@ export default function Nav({ data }) {
       </Container>
     </Box>
   );
-}
+};
+
+export default Nav;

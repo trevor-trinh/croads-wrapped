@@ -35,6 +35,7 @@ const WrappedPage = ({ swipes, locations, mealTimes, setDate }) => {
           timeBreakfast={mealTimes.avg.breakfast}
           timeLunch={mealTimes.avg.lunch}
           timeDinner={mealTimes.avg.dinner}
+          date={date}
         />
       ) : (
         <WrappedHero

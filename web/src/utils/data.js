@@ -3,9 +3,6 @@ import { getLocationData } from './locations';
 import { getSwipeData } from './swipes';
 
 export const parseData = (data, date) => {
-  //   // ----- FINAL RETURN DATA ------
-  //   const username = data['username'];
-
   // gets a semester's start and end given date
   const dateRange = getDateRange(date, 'semester');
 
@@ -25,32 +22,11 @@ export const parseData = (data, date) => {
     item => dateRange.start <= item.Posted && item.Posted <= dateRange.end,
   );
 
-  // ----- FINAL RETURN DATA -----
-  // {
-  //    location: null
-  // }
-  const locationDatum = getLocationData(semMealDatum);
-
   // puts all meal dates in this semester into array
   const semDates = loadDates(semMealDatum);
 
-  // ----- FINAL RETURN DATA -----
-  // {
-  //   early: null,
-  //   late: null,
-  //   avg: {
-  //       breakfast: null,
-  //       lunch: null,
-  //       dinner: null,
-  //   },
-  // }
+  const locationDatum = getLocationData(semMealDatum);
   const timeDatum = getTimeData(semDates);
-
-  // ----- FINAL RETURN DATA -----
-  // {
-  //   thisWeek: null,
-  //   avgWeek: null,
-  // }
   const swipeDatum = getSwipeData(semDates, date);
 
   return { locationDatum, timeDatum, swipeDatum };
@@ -64,6 +40,7 @@ const loadDates = datum => {
   return commonDates;
 };
 
+// hardcoded, add more semesters here
 const semRanges = {
   fa21: {
     start: new Date(2021, 7, 18),
@@ -105,6 +82,7 @@ export const getDateRange = (date, rangeType) => {
   return { start, end };
 };
 
+// hardcoded, add more semesters here
 export const cardDateData = [
   {
     semester: 'Fall 2021',

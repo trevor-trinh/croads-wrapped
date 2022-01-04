@@ -13,7 +13,7 @@ import {
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import NavLogo from './NavLogo';
 
-export default function Footer() {
+const Footer = () => {
   return (
     <Box
       bg={useColorModeValue('gray.50', 'gray.900')}
@@ -55,7 +55,7 @@ export default function Footer() {
             label={'Instagram'}
             href={'https://instagram.com/trevortrinh'}
             target="_blank"
-            // rel="noopener noreferrer"
+            rel="noopener noreferrer"
           >
             <Icon as={FaInstagram} />
           </SocialButton>
@@ -71,7 +71,7 @@ export default function Footer() {
       </Container>
     </Box>
   );
-}
+};
 
 const SocialButton = ({ children, label, href, rel, target }) => {
   return (
@@ -98,3 +98,5 @@ const SocialButton = ({ children, label, href, rel, target }) => {
     </chakra.button>
   );
 };
+
+export default Footer;

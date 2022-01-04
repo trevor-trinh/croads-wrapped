@@ -1,7 +1,7 @@
 import { Link, useColorModeValue } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
-export default function NavLogo() {
+const NavLogo = () => {
   let navigate = useNavigate();
 
   return (
@@ -9,7 +9,7 @@ export default function NavLogo() {
       <Logo />
     </NavLink>
   );
-}
+};
 
 export const NavLink = props => (
   <Link
@@ -43,3 +43,5 @@ const Logo = props => {
     </svg>
   );
 };
+
+export default NavLogo;

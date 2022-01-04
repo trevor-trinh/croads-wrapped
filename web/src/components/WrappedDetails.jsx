@@ -8,20 +8,24 @@ import {
   Flex,
   Spacer,
 } from '@chakra-ui/react';
-import { HiChevronDoubleUp } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
+import { HiChevronDoubleUp, HiArrowNarrowLeft } from 'react-icons/hi';
 import WrappedTime from './WrappedTime';
 import PictureFrame from './PictureFrame';
+import Croads from '../assets/croads.jpg';
+import Foothill from '../assets/foothill.jpeg';
+import Cafe3 from '../assets/cafe3.jpg';
+import Goldenbear from '../assets/goldenbear.jpg';
+import Clarkkerr from '../assets/clarkkerr.jpg';
+import Nowhere from '../assets/nowhere.webp';
 
 const diningImages = {
-  crossroads:
-    'https://i2.wp.com/www.dailycal.org/assets/uploads/2016/11/patz_mikaelaRaphael_staff.jpg?ssl=1&w=900',
-  foothill: 'https://miro.medium.com/max/700/1*JnS1SIM-a63KmnTTrYZVog.jpeg',
-  cafe3:
-    'https://news.berkeley.edu/wp-content/uploads/2016/08/kosher-and-halal-cafe.jpg',
-  goldenbear:
-    'https://s3.amazonaws.com/spoonuniversi-wpengine/spoonuniversi/wp-content/uploads/sites/23/2016/03/DSC_0018-1024x682.jpg',
-  clarkkerr:
-    'https://fastly.4sqi.net/img/general/600x600/356361_2_I2KCe4fu434tTPL7-uk_Wx0iLanCS3p5Lx2XFYeYM.jpg',
+  crossroads: Croads,
+  foothill: Foothill,
+  cafe3: Cafe3,
+  goldenbear: Goldenbear,
+  clarkkerr: Clarkkerr,
+  nowhere: Nowhere,
 };
 
 const WrappedDetails = ({
@@ -33,14 +37,15 @@ const WrappedDetails = ({
   timeBreakfast,
   timeLunch,
   timeDinner,
-  swipesAvg,
+  date,
 }) => {
+  const navigate = useNavigate();
   const parsedLocations =
     Object.keys(locations).length === 0 && locations.constructor === Object
       ? [
-          ['Crossroads', 0],
-          ['Crossroads', 0],
-          ['Crossroads', 0],
+          ['nowhere', 0],
+          ['nowhere', 0],
+          ['nowhere', 0],
         ]
       : Object.entries(locations).sort(([, a], [, b]) => b - a);
 
@@ -86,11 +91,17 @@ const WrappedDetails = ({
   return (
     <>
       <Container maxW={'6xl'} minH={'95vh'} pb={'calc(100vw * 0.09719)'}>
+        <Button
+          leftIcon={<HiArrowNarrowLeft />}
+          mt={6}
+          onClick={() => navigate('/wrapped', { state: { date: date } })}
+        >
+          Back
+        </Button>
         <Stack
           textAlign={'center'}
           align={'center'}
           spacing={{ base: 8, md: 10 }}
-          py={{ base: 12, md: 16 }}
         >
           <BigText>
             Each week, you used an average of <br />

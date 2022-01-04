@@ -1,8 +1,5 @@
 import { getDateRange } from './data';
 
-// not very accurate calculations, gets the job done for now
-// need to talk to someone...
-
 const checkable = (swipeList, pointDate, rangeType) => {
   const { start, end } = getDateRange(pointDate, rangeType);
   return date => {

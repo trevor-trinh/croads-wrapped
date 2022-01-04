@@ -3,13 +3,10 @@ import DateCard from '../components/DateCard';
 import { useEffect } from 'react';
 import { cardDateData } from '../utils/data';
 
-const HomePage = ({ username, data }) => {
+const HomePage = ({ username }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-
-    // for whoever's curious
-    window.rawUserData = data;
-  }, [data]);
+  }, []);
 
   return (
     <Container maxW={'5xl'} minH={'95vh'}>
@@ -39,8 +36,9 @@ const HomePage = ({ username, data }) => {
           maxW={'3xl'}
           fontSize={{ base: 'lg', md: 'xl' }}
         >
-          Here's some random text. Not really sure what to put here. Maybe
-          something funny. Should get an English major to help with this part.
+          Go Bears! Croads is definitely #1 in terms of overall dining
+          experience 😉. Try opening the console if you're curious, or just
+          click a semester to get started!
         </Text>
         <Container maxW={'4xl'}>
           <SimpleGrid columns={[1, null, 2]} w={'full'} spacing={12}>

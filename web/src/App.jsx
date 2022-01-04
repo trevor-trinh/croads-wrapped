@@ -13,7 +13,6 @@ import Layout from './components/Layout';
 
 import { parseData } from './utils/data';
 
-// could add some loading screens and animations
 const App = () => {
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +20,7 @@ const App = () => {
   const [data, setData] = useState();
 
   const [username, setUsername] = useState();
-  const [locations, setLocations] = useState({});
+  const [locations, setLocations] = useState();
   const [mealTimes, setMealTimes] = useState({
     early: null,
     late: null,
@@ -37,6 +36,23 @@ const App = () => {
   });
 
   useEffect(() => {
+    console.clear();
+    console.log('%cHeyo!', 'font-size: 40px; color: green;');
+    console.log(
+      `%cTry typing\n>>>\tinsights\ninto the console to see all your data `,
+      'font-size: 20px; color: green',
+    );
+    console.log('(without the >>> and click through the dropdowns)');
+    console.log('Tip: try it after you choose a semester');
+    console.log('\n');
+    console.log(
+      `%cAlso try \n>>>\tsetNavDate(new Date(<year>, <month> - 1, <day>))\nto see different swipes used that week in the nav bar`,
+      'font-size: 20px; color: green',
+    );
+    console.log('(replacing year, month, day with numbers of your choice)');
+  });
+
+  useEffect(() => {
     if (data) {
       const { locationDatum, timeDatum, swipeDatum } = parseData(data, date);
 
@@ -46,6 +62,9 @@ const App = () => {
       setSwipes(swipeDatum);
 
       setLoading(false);
+
+      // for whoever's curious
+      window.insights = [data, locationDatum, timeDatum, swipeDatum];
     }
   }, [data, date]);
 

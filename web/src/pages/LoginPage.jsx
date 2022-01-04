@@ -6,13 +6,21 @@ import {
   FormLabel,
   Heading,
   Input,
-  Link,
   Stack,
   Image,
   useToast,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 import OskiL from '../assets/OskiL.jpg';
 import Footer from '../components/Footer';
 
@@ -21,6 +29,7 @@ const LoginPage = ({ setData }) => {
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const toastIdRef = useRef();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -34,7 +43,7 @@ const LoginPage = ({ setData }) => {
     setIsLoading(true);
     toastIdRef.current = toast({
       title: 'Loading...',
-      description: 'Please check Duo Mobile (takes a bit)',
+      description: 'Please check Duo Mobile (may take a while)',
       status: 'warning',
       variant: 'left-accent',
       position: 'top',
@@ -111,9 +120,44 @@ const LoginPage = ({ setData }) => {
 
               <Checkbox isRequired>
                 I agree to the{' '}
-                <Link color={'blue.500'} href="#" target="_blank">
+                <Button color={'blue.500'} variant={'link'} onClick={onOpen}>
                   terms & conditions
-                </Link>
+                </Button>
+                <Modal isOpen={isOpen} onClose={onClose}>
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>We have no legal team (❁´◡`❁) </ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody textAlign={'center'} pb={4}>
+                      Use this website for fun! We take no responsibility for
+                      anything bad (＞︿＜) ! We don't collect any information,
+                      feel free to check our source code!
+                      <br />
+                      <br />
+                      Thank you! Enjoy the site and have a nice day!
+                      <br />
+                      (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
+                    </ModalBody>
+
+                    <ModalFooter>
+                      <Button colorScheme="blue" mr={3} onClick={onClose}>
+                        Close
+                      </Button>
+                      <Button
+                        variant={'ghost'}
+                        rightIcon={<ExternalLinkIcon />}
+                        onClick={() =>
+                          window.open(
+                            'https://github.com/trevor-trinh/croads-wrapped',
+                            '_blank',
+                          )
+                        }
+                      >
+                        Github Repo
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
               </Checkbox>
 
               <Button
