@@ -17,11 +17,13 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  HStack,
+  Spacer,
 } from '@chakra-ui/react';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
-import OskiL from '../assets/OskiL.jpg';
+import OskiDrip from '../assets/OskiDrip.png';
 import Footer from '../components/Footer';
 
 const LoginPage = ({ setData }) => {
@@ -94,9 +96,10 @@ const LoginPage = ({ setData }) => {
 
   return (
     <>
-      <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+      <HStack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+        <Spacer />
         <Flex flex={1}>
-          <Image alt={'Login Image'} objectFit={'cover'} src={OskiL} />
+          <Image alt={'Login Image'} objectFit={'cover'} src={OskiDrip} />
         </Flex>
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack
@@ -178,7 +181,8 @@ const LoginPage = ({ setData }) => {
             </Stack>
           </Stack>
         </Flex>
-      </Stack>
+        <Spacer />
+      </HStack>
       <Footer />
     </>
   );

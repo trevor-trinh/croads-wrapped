@@ -17,7 +17,7 @@ import Foothill from '../assets/foothill.jpeg';
 import Cafe3 from '../assets/cafe3.jpg';
 import Goldenbear from '../assets/goldenbear.jpg';
 import Clarkkerr from '../assets/clarkkerr.jpg';
-import Nowhere from '../assets/nowhere.webp';
+import OskiDrip from '../assets/OskiDrip.png';
 
 const diningImages = {
   crossroads: Croads,
@@ -25,7 +25,7 @@ const diningImages = {
   cafe3: Cafe3,
   goldenbear: Goldenbear,
   clarkkerr: Clarkkerr,
-  nowhere: Nowhere,
+  nowhere: OskiDrip,
 };
 
 const WrappedDetails = ({
