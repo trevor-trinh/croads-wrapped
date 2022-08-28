@@ -32,14 +32,25 @@ const loadPage = async creds => {
   await page.waitForNetworkIdle();
   const frames = page.frames();
   const frame = frames.find(f => f.url().includes('duosecurity.com'));
-  await frame.click(
-    '#auth_methods > fieldset:nth-child(1) > div.row-label.push-label > button',
-  );
+  try {
+    await frame.click(
+      '#auth_methods > fieldset:nth-child(1) > div.row-label.push-label > button',
+    );
+  } catch {
+    // do nothing
+  }
+
+  // click trust browser
+  await page.waitForNetworkIdle();
+  await Promise.all([
+    frame.click('#trust-browser-button'),
+    page.waitForNavigation(),
+  ]);
 
   // get user's name
   await page.waitForNetworkIdle();
   app.locals.username = await page.$eval(
-    'body > div > div.container.clearfix > div > div > div > div.col3 > div > table.bodytext > tbody > tr:nth-child(2) > td > b',
+    'body > div.background-with-image.clearfix > div.container.clearfix > div > div > div > div.col3 > div > table.bodytext > tbody > tr:nth-child(2) > td > b',
     el => el.innerText,
   );
 
