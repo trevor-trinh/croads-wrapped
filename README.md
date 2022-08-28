@@ -41,6 +41,11 @@ Made with a React frontend and Node backend.
 
 ## Screenshots
 
+More screenshots avaliable in the [assets](assets/)
+![Login screen](assets/login.jpg?raw=true)
+![Dashboard screen](assets/dashboard.jpg?raw=true)
+![Insights screen showing favorite location](assets/mosteaten.jpg?raw=true)
+
 ## Contributing
 
 If you would like to contribute, pull requests welcome! Any feedback is appreciated!
